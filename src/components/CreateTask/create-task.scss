@@ -1,0 +1,33 @@
+.create-task {
+    display: flex;
+    align-items: baseline;
+
+    box-sizing: border-box;
+    &__cell {
+        width: 100%;
+        height: 25px;
+        &_two {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+        }
+    }
+    &__input {
+        background-color: transparent;
+        width: 100%;
+        max-width: 650px;
+        margin: 0 10px 0 0;
+        &_rate {
+            width: 105px;
+        }
+    }
+    &__time {
+        width: 75px;
+        margin-right: 5px;
+        padding: 5px 0;
+
+        color: $note-color;
+        line-height: 1;
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,14 @@
+.button {
+    padding: 0;
+    width: 26px;
+    height: 26px;
+
+    opacity: 0.5;
+    transition: opacity $duration;
+
+    cursor: pointer;
+
+    &:hover {
+        opacity: 1;
+    }
+}
