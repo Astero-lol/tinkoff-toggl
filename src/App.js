@@ -20,12 +20,13 @@ class App extends React.Component {
         });
 	}
 
-	handleAdd(id, title, rate, sum, minute, hours,time, timeStart, timeEnd) {
+	handleAdd(id, title, rate, sum, second, minute, hours,time, timeStart, timeEnd) {
 		let task = {
 			id, //идентификатор
 			title, // Название задачи
 			rate, // Ставка в час
             sum, // Сумма за все время
+			second, // Количество секунд на задачу
 			minute, // Количество минут на задачу
             hours, // Количество часов на задачу
 			time, // Потрачено времени на задачу
@@ -52,8 +53,15 @@ class App extends React.Component {
             if (id === task.id) {
             	task.title = title;
             	task.rate = rate;
-            	task.sum = task.hours === 0 ?
-					task.minute * (rate / 60) : task.hours * rate + task.minute * (rate / 60);
+            	task.sum = task.hours === 0 ? task.minute * (rate / 60) : task.hours * rate + task.minute * (rate / 60);
+
+            	if (task.minute === 0) {
+            		task.sum = task.second * ((rate / 60) / 60)
+				} else if (task.hours === 0 && task.minute > 0) {
+            		task.sum = task.minute * (rate / 60)
+				} else {
+            		task.sum = task.hours * rate + task.minute * (rate / 60)
+				}
 			}
 
 			return task

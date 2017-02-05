@@ -71,15 +71,27 @@ class CreateTask extends React.Component {
 
         let title = this.refs.title.value,
             rate = +this.refs.rate.value,
-            sum = this.hours === 0 ? this.minute * (rate / 60) : this.hours * rate + this.minute * (rate / 60);
+            sum,
+
+            rateSecond = (rate / 60) / 60; // цена за секунду
+
+
+        if (this.minute === 0) {
+            sum = this.second * rateSecond;
+        } else if (this.hours === 0 && this.minute > 0) {
+            sum = this.minute * (rate / 60)
+        } else {
+            sum = this.hours * rate + this.minute * (rate / 60)
+        }
 
         const { timeStart, counterValue } = this.state;
 
         this.props.onAdd( // Добавление задачи
         	this.createId(), // Генерирует идентификатор
 			title, // Значение инпута "Задача"
-			rate, // Значение инпуна "Ставка"
+			rate, // Значение инпута "Ставка"
 			sum, // Общая сумма за задачу
+            this.second, // Количество секунд за задачу
 			this.minute, // Количество минут на задачу
 			this.hours, // Количество часов на задачу
 			counterValue, // Общее время задачи
